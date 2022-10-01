@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+ .navcolor{
+  background-color: #6c98d9 ;
+ }
+
+ .cardStyle{
+  /* width: 47%; */
+  width: 30%;
+  overflow: hidden;
+ }
+
+ .customContainer{
+  padding: 1em;
+ }
