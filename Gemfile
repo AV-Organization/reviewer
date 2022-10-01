@@ -72,3 +72,7 @@ group :test do
 end
 
 gem "devise", "~> 4.8"
+
+gem "yt", "~> 0.33.4"
+
+gem "figaro", "~> 1.2"
