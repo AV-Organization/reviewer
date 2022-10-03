@@ -17,12 +17,8 @@
   background-color: #6c98d9 ;
  }
 
- .cardStyle{
-  /* width: 47%; */
-  width: 30%;
-  overflow: hidden;
- }
-
- .customContainer{
-  padding: 1em;
+ .customLink{
+  text-decoration: none !important;
+  color: black !important;
+  transition: color 0.5s !important;
  }

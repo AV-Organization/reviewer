@@ -1,7 +1,6 @@
-<%@link.in_groups_of(3).each do%>
-<div class="d-flex flex-row justify-content-evenly">
-<%=render partial: "partials/vedio-card", locals: {link: Link.first}%>
-<%=render partial: "partials/vedio-card", locals: {link: Link.first}%>
-<%=render partial: "partials/vedio-card", locals: {link: Link.first}%>
+<div class="row row-cols-3 m-2">
+  <%@link.each do |url|%>
+    <div class="col"><%=render partial: "partials/video-card", locals: {link: url}%></div>
+  <%end%>
 </div>
-<%end%>
+
