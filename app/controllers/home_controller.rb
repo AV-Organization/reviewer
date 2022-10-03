@@ -19,10 +19,26 @@ class HomeController < ApplicationController
 
   def show
     @link = Link.find(params[:id])
+    @comment = Comment.new
+    @comments = Comment.all
+    flash[:back] = home_path(params[:id])
+  end
+
+  def comment_create
+    @comment = Comment.new(params_comment)
+    @comment.commentable = current_user
+    @comment.save
+    flash[:errors] = 'error creating comment' if @comment.errors.any?
+    redirect_to flash[:back]
   end
 
   private
+
   def params_method
     params.require(:link).permit(:title, :review, :link)
+  end
+
+  def params_comment
+    params.require(:comment).permit(:body)
   end
 end
