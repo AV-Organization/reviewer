@@ -20,8 +20,12 @@
         </li>
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <%if current_page?(home_index_path) || current_page?(root_path)%>
+          <%= search_form_for @q ,url: home_index_path do |f| %>
+              <%= f.search_field :title_cont , placeholder: 'search'%>
+              <%= f.button 'search', class: "btn btn-info"%>
+          <% end %>
+        <%end%>
       </form><span class="nav-item dropdown ">
           <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown

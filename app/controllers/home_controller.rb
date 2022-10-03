@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
-    @links = Link.all
+    @q = Link.ransack(params[:q])
+    @links = @q.result(distinct: true)
   end
 
   def new
