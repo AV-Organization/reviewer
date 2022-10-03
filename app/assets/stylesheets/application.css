@@ -13,3 +13,22 @@
  *= require_tree .
  *= require_self
  */
+ .navcolor{
+  background-color: #6c98d9 ;
+ }
+
+ .customLink{
+  text-decoration: none !important;
+  color: black !important;
+  transition: color 0.5s !important;
+ }
+
+a.disabled{
+  pointer-events: none;
+  text-decoration: none;
+}
+
+p.comment{
+  padding-left: 0.5em;
+  border-left: 1px solid black;
+}
