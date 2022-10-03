@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @link = Link.all
+    @links = Link.all
   end
 
   def new

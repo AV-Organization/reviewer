@@ -1,5 +1,5 @@
 <div class="row row-cols-3 m-2">
-  <%@link.each do |url|%>
+  <%@links.each do |url|%>
     <div class="col"><%=render partial: "partials/video-card", locals: {link: url}%></div>
   <%end%>
 </div>
