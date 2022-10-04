@@ -74,6 +74,7 @@ GEM
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    cancancan (3.4.0)
     capybara (3.37.1)
       addressable
       matrix
@@ -96,8 +97,11 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.11.0)
+    ffi (1.15.5)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
+    font-awesome-sass (6.2.0)
+      sassc (~> 2.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.12.0)
@@ -175,6 +179,9 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
+    rb-fsevent (0.11.2)
+    rb-inotify (0.10.1)
+      ffi (~> 1.0)
     redis (4.8.0)
     regexp_parser (2.6.0)
     reline (0.3.1)
@@ -184,6 +191,13 @@ GEM
       railties (>= 5.0)
     rexml (3.2.5)
     rubyzip (2.3.2)
+    sass (3.7.4)
+      sass-listen (~> 4.0.0)
+    sass-listen (4.0.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (4.5.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -233,10 +247,12 @@ PLATFORMS
 DEPENDENCIES
   acts_as_votable (~> 0.13.2)
   bootsnap
+  cancancan (~> 3.4)
   capybara
   debug
   devise (~> 4.8)
   figaro (~> 1.2)
+  font-awesome-sass (~> 6.2)
   importmap-rails
   jbuilder
   pagy (~> 5.10)
@@ -245,6 +261,7 @@ DEPENDENCIES
   rails (~> 7.0.4)
   ransack (~> 3.2)
   redis (~> 4.0)
+  sass (~> 3.7)
   selenium-webdriver
   sprockets-rails
   stimulus-rails

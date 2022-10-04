@@ -1,19 +1,22 @@
+<br>
 <div class="container">
   <h1><%=@link.title.titleize%></h1>
   <br>
   <iframe 
-    width="560" height="315" src=<%=@link.embed%>
+    width="1100" height="600" src=<%=@link.embed%>
     title="YouTube video player" frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
     allowfullscreen
     referrerpolicy="strict-origin-when-cross-origin">
   </iframe>
+
   <p><%=@link.review%></p>
   <p><small class="text-muted">Last updated <%=time_ago_in_words(@link.updated_at)%></small></p><br>
+  <br><br>
   <%=link_to 'like', likeable_path(@link.id,'true'),data: {turbo_method: :post}, class: 'btn btn-success', remote: true%> 
   <%=link_to 'dislike', likeable_path(@link.id,'false'), data: {turbo_method: :post}, class: 'btn btn-danger', remote: true%>
-  <br>
-  <p id="likes">likes : <%=@link.get_likes.size - @link.get_dislikes.size%></p>
+  <div id="rateing"><br><p id="likes">likes : <%=@link.get_likes.size - @link.get_dislikes.size%></p>
+    <%=stars(@link.get_likes.size,@link.get_dislikes.size)%></div>
   <br>
   <%if user_signed_in?%>
     <%=form_for @comment, url: comment_path do |f|%>

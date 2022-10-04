@@ -6,6 +6,7 @@ class HomeController < ApplicationController
   end
 
   def new
+    authorize! :create, Link
     @link = Link.new
   end
 
