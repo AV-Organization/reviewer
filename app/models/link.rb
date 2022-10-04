@@ -11,7 +11,6 @@ class Link < ApplicationRecord
   validate :size_check
 
   def size_check
-    
     if link.include?('watch?v=')
       @uid = link.split('watch?v=')[1]
       errors.add(:link, 'should be a valid youtube link') if @uid&.size != 11 && !errors.any?
