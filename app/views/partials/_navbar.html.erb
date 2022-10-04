@@ -12,12 +12,18 @@
         <li class="nav-item">
           <%=link_to "Create Review", new_home_path, class:"nav-link #{"active" if current_page?(new_home_path)}"%>
         </li>
+        <%unless user_signed_in?%>
         <li class="nav-item">
           <%=link_to "Log in", new_user_session_path, class:"nav-link #{"active" if current_page?(new_user_session_path)}"%>
         </li>
         <li class="nav-item">
           <%=link_to 'Sign up', new_user_registration_path, class:"nav-link #{"active" if current_page?(new_user_registration_path)}"%>
         </li>
+        <%else%>
+        <li class="nav-item">
+          <%=link_to 'Sign out', destroy_user_session_path, data: {turbo_method: :delete}, class: 'nav-link'%>
+        </li>
+        <%end%>
       </ul>
       <form class="d-flex">
         <%if current_page?(home_index_path) || current_page?(root_path)%>
@@ -28,7 +34,7 @@
         <%end%>
       </form><span class="nav-item dropdown ">
           <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            Welcome <%=user_signed_in? ? current_user.email : 'User'%>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#">Action</a></li>

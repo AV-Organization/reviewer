@@ -11,15 +11,21 @@
   <p><%=@link.review%></p>
   <p><small class="text-muted">Last updated <%=time_ago_in_words(@link.updated_at)%></small></p>
   <br>
-<%=form_for @comment, url: comment_path do |f|%>
-  <div class="mb-3">
-    <%=f.label :body, 'comment :-', class: 'form-label'%><br>
-    <%=f.text_area :body, class: 'form-control w-50'%>
-  </div>
-  <%=f.submit 'add comment', class: 'btn btn-primary' %>
+  <%if user_signed_in?%>
+    <%=form_for @comment, url: comment_path do |f|%>
+      <div class="mb-3">
+        <%=f.label :body, 'comment :-', class: 'form-label'%><br>
+        <%=f.text_area :body, class: 'form-control w-50'%>
+      </div>
+      <%=f.hidden_field :commentable, value: "#{@link.id}"%>
+      <%=f.submit 'add comment', class: 'btn btn-primary' %>
+      
+    <%end%>
+  <%else%>
+    <p>Must be signed in to comment</p>
   <%end%>
   <br>
   <%@comments&.each do |c|%>
-    <p class="comment"><%=c.commentable.email%> : <%=c.body%></p><br>
+    <p class="comment"><%=c.user.email%> : <%=c.body%></p><br>
   <%end%>
 </div>

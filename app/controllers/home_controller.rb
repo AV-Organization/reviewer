@@ -21,13 +21,15 @@ class HomeController < ApplicationController
   def show
     @link = Link.find(params[:id])
     @comment = Comment.new
-    @comments = Comment.all
+    @comments = @link.comments.all
     flash[:back] = home_path(params[:id])
   end
 
   def comment_create
+    @link = Link.find(params[:comment][:commentable])
     @comment = Comment.new(params_comment)
-    @comment.commentable = current_user
+    @comment.commentable = @link
+    @comment.user = current_user
     @comment.save
     flash[:errors] = 'error creating comment' if @comment.errors.any?
     redirect_to flash[:back]
