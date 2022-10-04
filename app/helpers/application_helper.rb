@@ -1,4 +1,3 @@
+include Pagy::Frontend
 module ApplicationHelper
-  def iframe_maker(url)
-  end
 end

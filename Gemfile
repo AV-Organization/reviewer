@@ -80,3 +80,5 @@ gem "figaro", "~> 1.2"
 gem "ransack", "~> 3.2"
 
 gem "acts_as_votable", "~> 0.13.2"
+
+gem "pagy", "~> 5.10"

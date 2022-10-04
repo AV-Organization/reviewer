@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   def index
+    Pagy::DEFAULT[:items] = 9
     @q = Link.ransack(params[:q])
-    @links = @q.result(distinct: true)
+    @pagy,@links = pagy(@q.result)
   end
 
   def new
@@ -51,7 +52,7 @@ class HomeController < ApplicationController
       end
     end
     respond_to do |format|
-      format.turbo_stream { render partial: 'home/likeable', locals: {link: @link} }
+      format.turbo_stream { render partial: 'partials/likeable', locals: {link: @link} }
     end
   end
   private
