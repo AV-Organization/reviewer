@@ -78,3 +78,5 @@ gem "yt", "~> 0.33.4"
 gem "figaro", "~> 1.2"
 
 gem "ransack", "~> 3.2"
+
+gem "acts_as_votable", "~> 0.13.2"
