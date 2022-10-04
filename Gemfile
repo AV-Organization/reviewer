@@ -76,3 +76,15 @@ gem "devise", "~> 4.8"
 gem "yt", "~> 0.33.4"
 
 gem "figaro", "~> 1.2"
+
+gem "ransack", "~> 3.2"
+
+gem "acts_as_votable", "~> 0.13.2"
+
+gem "pagy", "~> 5.10"
+
+gem "cancancan", "~> 3.4"
+
+gem "font-awesome-sass", "~> 6.2"
+
+gem "sass", "~> 3.7"

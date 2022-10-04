@@ -1,3 +1,6 @@
+<div class="container">
+<%= render partial: "partials/pagy_nav", locals: {pagy: @pagy} %>
+</div>
 <div class="row row-cols-3 m-2">
   <%@links.each do |url|%>
     <div class="col"><%=render partial: "partials/video-card", locals: {link: url}%></div>

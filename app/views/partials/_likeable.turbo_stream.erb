@@ -1,0 +1,6 @@
+<turbo-stream action="replace" target="rateing">
+  <template>
+    <div id="rateing"><br><p id="likes">likes : <%=link.get_likes.size - link.get_dislikes.size%></p>
+    <%=stars(@link.get_likes.size,@link.get_dislikes.size)%></div>
+  </template>
+</turbo-stream>

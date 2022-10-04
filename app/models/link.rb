@@ -1,4 +1,6 @@
 class Link < ApplicationRecord
+  acts_as_votable
+
   youtube_link_format = /(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([\w\-_]+)\&?/
 
   has_many :comments, as: :commentable, dependent: :destroy
@@ -9,11 +11,10 @@ class Link < ApplicationRecord
   validate :size_check
 
   def size_check
-    
     if link.include?('watch?v=')
       @uid = link.split('watch?v=')[1]
       errors.add(:link, 'should be a valid youtube link') if @uid&.size != 11 && !errors.any?
-      
+
     else
       @uid = link.split('.com/')[1]
       errors.add(:link, 'should be a valid youtube link') if @uid&.size != 11 && !errors.any?

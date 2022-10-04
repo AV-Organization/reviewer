@@ -1,9 +1,12 @@
 class HomeController < ApplicationController
   def index
-    @links = Link.all
+    Pagy::DEFAULT[:items] = 9
+    @q = Link.ransack(params[:q])
+    @pagy,@links = pagy(@q.result)
   end
 
   def new
+    authorize! :create, Link
     @link = Link.new
   end
 
@@ -20,18 +23,26 @@ class HomeController < ApplicationController
   def show
     @link = Link.find(params[:id])
     @comment = Comment.new
-    @comments = Comment.all
+    @comments = @link.comments.all
     flash[:back] = home_path(params[:id])
   end
 
   def comment_create
-    @comment = Comment.new(params_comment)
-    @comment.commentable = current_user
+    @link = Link.find_by(id: params[:comment][:commentable])
+    @comment = current_user.comments.new(params_comment)
+    @comment.commentable = @link
     @comment.save
-    flash[:errors] = 'error creating comment' if @comment.errors.any?
+    flash[:errors] = @comment.errors.full_message if @comment.errors.any?
     redirect_to flash[:back]
   end
 
+  def likeable
+    @link = Link.find(params[:id])
+    LikerService.new(@link, params[:bool], current_user).call
+    respond_to do |format|
+      format.turbo_stream { render partial: 'partials/likeable', locals: {link: @link} }
+    end
+  end
   private
 
   def params_method
