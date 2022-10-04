@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
-    @links = Link.all
+    @q = Link.ransack(params[:q])
+    @links = @q.result(distinct: true)
   end
 
   def new
@@ -20,18 +21,39 @@ class HomeController < ApplicationController
   def show
     @link = Link.find(params[:id])
     @comment = Comment.new
-    @comments = Comment.all
+    @comments = @link.comments.all
     flash[:back] = home_path(params[:id])
   end
 
   def comment_create
+    @link = Link.find(params[:comment][:commentable])
     @comment = Comment.new(params_comment)
-    @comment.commentable = current_user
+    @comment.commentable = @link
+    @comment.user = current_user
     @comment.save
     flash[:errors] = 'error creating comment' if @comment.errors.any?
     redirect_to flash[:back]
   end
 
+  def likeable
+    @link = Link.find(params[:id])
+    if params[:bool] == 'true'
+      if current_user.voted_for? @link
+        @link.unliked_by current_user
+      else
+        @link.liked_by current_user 
+      end
+    elsif params[:bool] == 'false'
+      if current_user.voted_for? @link
+        @link.undisliked_by current_user
+      else
+        @link.disliked_by current_user 
+      end
+    end
+    respond_to do |format|
+      format.turbo_stream { render partial: 'home/likeable', locals: {link: @link} }
+    end
+  end
   private
 
   def params_method
