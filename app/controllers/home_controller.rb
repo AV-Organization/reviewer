@@ -50,7 +50,9 @@ class HomeController < ApplicationController
         @link.disliked_by current_user 
       end
     end
-    redirect_to home_path(params[:id])
+    respond_to do |format|
+      format.turbo_stream { render partial: 'home/likeable', locals: {link: @link} }
+    end
   end
   private
 
